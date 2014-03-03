@@ -29,13 +29,36 @@ Require in `Capfile` to use the default task:
 
     require 'capistrano/vmf'
 
-TODO: Configure app for Capistrano
-TODO: Configure config/deploy/* with server, domain, and services
+For your `config/deploy.rb`, you'll want as a minimum:
+```
+# Point cap to your application
+lock '3.1.0'
+set :application, 'vmftest'
+set :repo_url, 'git@bitbucket.org:yourname/repo.git'
+set :pty, true
+
+set :rvm1_ruby_version, "2.0.0-p247"
+```
+
+Then, in each `config/deploy/*.rb` (corresponding to your environment)
+```
+# The list of servers, one line each
+server '1.2.3.4', user: 'deploy', roles: %w{web app}
+# The primary domain name of this environment, that you gave to VMF
+set :site_name, "vmf.ertw.com"
+# The list of services that get restarted.
+set :supervisor_services, %w[resque-dev]
+```
+
+Note that options set in `deploy.rb` are overridden in the environment file, and all these options are valid at either level.
 
 Configurable options:
+```
   set :ruby_version, "2.0.0-p247"         # Pick the version of Ruby you'll use
   set :site_name, "test.example.com"      # The hostname of your application (VMF has this, too)
                                           # Each environment will probably have it's own in `config/deploy/*.rb`
+  set :supervisor_services, %q[unicorn resque]  # the list of services to restart (supervisord)
+```
 
 
 ## Contributing

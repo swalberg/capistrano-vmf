@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "capistrano-vmf"
-  spec.version       = 0.0.1
+  spec.version       = "0.0.1"
   spec.authors       = ["Sean Walberg"]
   spec.email         = ["sean@ertw.com"]
   spec.description   = %q{Some capistrano automation to handle apps deployed to VMFarms}
@@ -21,4 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
 
   spec.add_dependency "capistrano", "~> 3.0"
+  spec.add_dependency "rvm1-capistrano3"
 end

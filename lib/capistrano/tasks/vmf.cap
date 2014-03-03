@@ -1,0 +1,22 @@
+namespace :load do
+  task :defaults do
+    set :deploy_to, -> { "/data/web/#{fetch(:site_name)}" }
+    fetch(:default_env).merge!( rvm_path: "/data/rvm" ) 
+  end
+end
+namespace :deploy do
+
+  desc 'Restart VMF services'
+  task :restart_vmf_services do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      Array(fetch(:supervisor_services)).each do |service|
+        execute :sudo, "supervisorctl", "restart", service
+      end
+    end
+  end
+
+  after :publishing, :restart_vmf_services
+
+end
+
