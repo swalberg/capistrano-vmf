@@ -1,6 +1,6 @@
 # Capistrano::Vmf
 
-[VMFarms.com](http://vmfarms.com) integration for bundler. If you're deploying a Rails app to VMFarms then this is a set of tasks that will conform to their best practices.
+[VMFarms.com](http://vmfarms.com) integration for bundler. If you're deploying a Rails app to VMFarms then this is a set of tasks that will conform to their best practices, and some generators that get you the most out of your hosting.
 
 In particular,
 
@@ -11,6 +11,8 @@ In particular,
 
 ## Installation
 
+Once you've got Capistrano installed,
+
 Add this line to your application's Gemfile:
 
     gem 'capistrano-vmf'
@@ -18,10 +20,6 @@ Add this line to your application's Gemfile:
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install capistrano-vmf
 
 ## Usage
 
@@ -47,7 +45,7 @@ server '1.2.3.4', user: 'deploy', roles: %w{web app}
 # The primary domain name of this environment, that you gave to VMF
 set :site_name, "vmf.ertw.com"
 # The list of services that get restarted.
-set :supervisor_services, %w[resque-dev]
+set :supervisor_services, %w[unicorn resque-dev]
 ```
 
 Note that options set in `deploy.rb` are overridden in the environment file, and all these options are valid at either level.
@@ -58,7 +56,32 @@ Configurable options:
   set :site_name, "test.example.com"      # The hostname of your application (VMF has this, too)
                                           # Each environment will probably have it's own in `config/deploy/*.rb`
   set :supervisor_services, %q[unicorn resque]  # the list of services to restart (supervisord)
+
 ```
+
+## Generators
+
+This gem provides two generators that set up Unicorn and NewRelic RPM according to VMFarms recommended configuration.
+
+### Unicorn
+
+[Unicorn](unicorn.bogomips.org) is a high performance application server that allows you to restart your application with zero downtime. When you restart, a new set of unicorn processes are spun up leaving the old ones to handle requests. The new servers start taking requests when the booting is complete, then the old servers are killed. VMFarms has special configuration on their side to do the zero downtime restarts correctly.
+
+To use Unicorn in your application, run
+
+    bundle exec rails generate vmf:unicorn
+    bundle install
+
+It will update your Gemfile and add a `config/unicorn.rb`. By default 4 application servers are run but this is easily changed by talking to VMFarms support.
+
+### NewRelic
+
+VMFarms has a partnership with [NewRelic](http://newrelic.com/) to give you free access to a standard account which provides detailed application performance monitoring. You will need a license key from VMFarms, then run
+
+    bundle exec rails generate vmf:newrelic
+    bundle install
+
+You will be prompted for the licence key.
 
 
 ## Contributing
