@@ -1,3 +1,4 @@
+include Capistrano::DSL
 namespace :load do
   task :defaults do
     set :deploy_to, -> { "/data/web/#{fetch(:site_name)}" }
