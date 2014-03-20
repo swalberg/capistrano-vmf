@@ -1,6 +1,6 @@
 # Capistrano::Vmf
 
-[VMFarms.com](http://vmfarms.com) integration for bundler. If you're deploying a Rails app to VMFarms then this is a set of tasks that will conform to their best practices, and some generators that get you the most out of your hosting.
+[VMFarms.com](http://vmfarms.com) integration for [Capistrano](http://capistranorb.com/). If you're deploying a Rails app to VMFarms then this is a set of tasks that will conform to their best practices, and some generators that get you the most out of your hosting.
 
 In particular,
 
@@ -101,6 +101,7 @@ Do you want to store secrets in a config file on the server?
     set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system} # Same for directories
 
 Then copy the local file config/database.yml to all your servers
+
     cap production files:copy[config/database.yml] # copies local database.yml to all servers
 
 ## Contributing
