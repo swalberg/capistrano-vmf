@@ -84,6 +84,25 @@ VMFarms has a partnership with [NewRelic](http://newrelic.com/) to give you free
 You will be prompted for the licence key.
 
 
+## Other stuff
+
+Have a Redis server? Define it:
+
+    server 'user@redisserver', roles: %w{redis}, no_release: true
+
+Then you have two tasks:
+
+    redis:keys - shows all the keys
+    redis:flush - flush all the Redis keys
+
+Do you want to store secrets in a config file on the server?
+
+    set :linked_files, %w{config/database.yml}  # in your deploy
+    set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system} # Same for directories
+
+Then copy the local file config/database.yml to all your servers
+    cap production files:copy[config/database.yml] # copies local database.yml to all servers
+
 ## Contributing
 
 1. Fork it
