@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.version       = "1.0.1"
   spec.authors       = ["Sean Walberg"]
   spec.email         = ["sean@ertw.com"]
-  spec.description   = %q{Some capistrano automation to handle apps deployed to VMFarms}
-  spec.summary       = %q{Some capistrano automation to handle apps deployed to VMFarms}
+  spec.description   = %q{Some capistrano automation to handle apps deployed to VM Farms}
+  spec.summary       = %q{Some capistrano automation to handle apps deployed to VM Farms}
   spec.homepage      = "https://github.com/swalberg/capistrano-vmf"
   spec.license       = "MIT"
 
