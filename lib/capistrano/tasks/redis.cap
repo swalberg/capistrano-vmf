@@ -1,0 +1,17 @@
+namespace :redis do
+  desc "List all keys"
+  task :keys do |task|
+    on roles(:redis), in: :parallel do
+      set :default_shell, "/bin/bash"
+      puts capture "/usr/bin/redis-cli keys '*'"
+    end
+  end
+
+  desc "Flush all keys"
+  task :flush do |task|
+    on roles(:redis), in: :parallel do
+      set :default_shell, "/bin/bash"
+      puts capture  "/usr/bin/redis-cli flushdb"
+    end
+  end
+end

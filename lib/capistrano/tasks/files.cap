@@ -1,0 +1,12 @@
+namespace :files do
+  desc "Copy a local file to the shared directory of the server"
+  task :copy, :file do |task, args|
+    on release_roles(:all), except: { no_release: true } do
+      if args[:file].nil?
+        puts "cap <environment> files:copy[config/foo.yml]"
+      else
+        upload! args[:file], "#{shared_path}/#{args[:file]}"
+      end
+    end
+  end
+end
