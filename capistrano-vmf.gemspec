@@ -4,12 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "capistrano-vmf"
-  spec.version       = "0.0.1"
+  spec.version       = "1.0.1"
   spec.authors       = ["Sean Walberg"]
   spec.email         = ["sean@ertw.com"]
   spec.description   = %q{Some capistrano automation to handle apps deployed to VMFarms}
   spec.summary       = %q{Some capistrano automation to handle apps deployed to VMFarms}
-  spec.homepage      = "https://github.com/swalberg/capistrano-rvm"
+  spec.homepage      = "https://github.com/swalberg/capistrano-vmf"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
